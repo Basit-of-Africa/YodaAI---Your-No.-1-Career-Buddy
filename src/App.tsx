@@ -32,6 +32,7 @@ import { ChatWidgetMockup } from './components/ChatWidgetMockup';
 import { FAQAccordion } from './components/FAQAccordion';
 import { Footer } from './components/Footer';
 import { RobotMascot } from './components/RobotMascot';
+import { InteractiveWalkthrough } from './components/InteractiveWalkthrough';
 
 // Use path of our generated premium hero illustration
 const heroIllustration = "/src/assets/images/yodaai_hero_illustration_1784033006039.jpg";
@@ -353,78 +354,8 @@ export default function App() {
         </section>
 
 
-        {/* 5. HOW IT WORKS */}
-        <section className="py-20 bg-[#FAFBFC] border-y border-gray-100" id="how-it-works">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="pill text-xs font-bold tracking-widest text-brand-blue uppercase bg-brand-blue/5 px-3 py-1.5 mb-3 inline-block">
-                Simple Roadmap
-              </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-brand-navy tracking-tight">
-                Your Path to <span className="text-accent-gradient">Workforce Ready</span>
-              </h2>
-              <p className="mt-4 text-base text-gray-500 font-sans">
-                Four simple phases engineered to boost your employment confidence.
-              </p>
-            </div>
-
-            {/* Step Roadmap Timeline */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative" id="roadmap-steps">
-              
-              {/* Connector line on desktop */}
-              <div className="hidden md:block absolute top-[44px] left-[10%] right-[10%] h-0.5 bg-gray-200 -z-10"></div>
-
-              {/* Step 1 */}
-              <div className="text-center space-y-4">
-                <div className="w-12 h-12 rounded-full bg-brand-navy text-white font-heading font-extrabold flex items-center justify-center mx-auto shadow-md relative">
-                  01
-                  <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-brand-green rounded-full flex items-center justify-center border-2 border-white"></span>
-                </div>
-                <h3 className="font-heading font-bold text-base text-brand-navy">Upload CV</h3>
-                <p className="text-xs text-gray-500 font-sans max-w-xs mx-auto leading-relaxed">
-                  Simply paste or upload your existing resume profile to YodaAI securely.
-                </p>
-              </div>
-
-              {/* Step 2 */}
-              <div className="text-center space-y-4">
-                <div className="w-12 h-12 rounded-full bg-brand-navy text-white font-heading font-extrabold flex items-center justify-center mx-auto shadow-md relative">
-                  02
-                  <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-brand-green rounded-full flex items-center justify-center border-2 border-white"></span>
-                </div>
-                <h3 className="font-heading font-bold text-base text-brand-navy">Get Assessment</h3>
-                <p className="text-xs text-gray-500 font-sans max-w-xs mx-auto leading-relaxed">
-                  Receive instant scoring on metrics, keywords, format layout, and density gaps.
-                </p>
-              </div>
-
-              {/* Step 3 */}
-              <div className="text-center space-y-4">
-                <div className="w-12 h-12 rounded-full bg-brand-navy text-white font-heading font-extrabold flex items-center justify-center mx-auto shadow-md relative">
-                  03
-                  <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-brand-blue rounded-full flex items-center justify-center border-2 border-white"></span>
-                </div>
-                <h3 className="font-heading font-bold text-base text-brand-navy">Apply Recommendations</h3>
-                <p className="text-xs text-gray-500 font-sans max-w-xs mx-auto leading-relaxed">
-                  Use guiding prompts to rewrite weak statements and build metric-driven bullet points.
-                </p>
-              </div>
-
-              {/* Step 4 */}
-              <div className="text-center space-y-4">
-                <div className="w-12 h-12 rounded-full bg-accent-gradient text-white font-heading font-extrabold flex items-center justify-center mx-auto shadow-lg relative">
-                  04
-                  <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center border-2 border-brand-navy"></span>
-                </div>
-                <h3 className="font-heading font-bold text-base text-brand-navy">Prepare & Shine</h3>
-                <p className="text-xs text-gray-500 font-sans max-w-xs mx-auto leading-relaxed">
-                  Follow step checklists and run interactive drills to guarantee interview composure.
-                </p>
-              </div>
-
-            </div>
-          </div>
-        </section>
+        {/* 5. INTERACTIVE WALKTHROUGH */}
+        <InteractiveWalkthrough />
 
 
         {/* 6. WHO IT IS FOR */}
