@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Manrope", "Inter", sans-serif;
+  --color-brand-navy: #0B1120;
+  --color-brand-navy-light: #4B5563;
+  --color-brand-green: #2ECC71;
+  --color-brand-blue: #2E86FF;
+  --color-brand-offwhite: #FAFBFC;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: var(--color-brand-offwhite);
+    color: var(--color-brand-navy-light);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: #0B1120;
+  }
+}
+
+/* Custom styles for Professional Polish theme */
+.accent-gradient, .bg-accent-gradient {
+  background: linear-gradient(90deg, #2ECC71 0%, #2E86FF 100%);
+}
+
+.accent-text, .text-accent-gradient {
+  background: linear-gradient(90deg, #2ECC71 0%, #2E86FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-gradient {
+  border-image: linear-gradient(90deg, #2ECC71, #2E86FF) 1;
+}
+
+.chat-bubble {
+  position: relative;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.chat-user {
+  background: #E5E7EB;
+  color: #0B1120;
+  align-self: flex-end;
+}
+
+.chat-yoda {
+  background: #0B1120;
+  color: white;
+  align-self: flex-start;
+}
+
+.feature-card {
+  transition: all 0.2s;
+  border: 1px solid #E5E7EB;
+  background-color: #FFFFFF;
+}
+
+.feature-card:hover {
+  border-color: #2E86FF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46, 134, 255, 0.05);
+}
+
+.pill {
+  background: #F3F4F6;
+  color: #4B5563;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  display: inline-block;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.pill:hover {
+  background: #E5E7EB;
+  color: #0B1120;
+}
+
+.hover-accent-glow:hover {
+  box-shadow: 0 10px 25px -5px rgba(46, 134, 255, 0.3);
+}
+

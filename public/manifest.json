@@ -1,0 +1,22 @@
+{
+  "short_name": "YodaAI",
+  "name": "YodaAI: Your No. 1 Career Buddy",
+  "description": "AI-powered guidance to sharpen your CV, ace your interviews, and land the right opportunity — prepared for iLEAD AFRICA.",
+  "icons": [
+    {
+      "src": "https://picsum.photos/id/1025/192/192",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://picsum.photos/id/1025/512/512",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#FAFBFC",
+  "theme_color": "#0B1120",
+  "display": "standalone",
+  "orientation": "portrait"
+}
