@@ -10,8 +10,9 @@ import { RobotMascot } from './RobotMascot';
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Add shadow on scroll
+  // Add shadow and track scroll progress
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -19,8 +20,20 @@ export const Header: React.FC = () => {
       } else {
         setIsScrolled(false);
       }
+
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(progress);
+      } else {
+        setScrollProgress(0);
+      }
     };
+    
     window.addEventListener('scroll', handleScroll);
+    // Initial call to set status in case page starts scrolled
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -41,6 +54,14 @@ export const Header: React.FC = () => {
           : 'bg-[#FAFBFC]/90 backdrop-blur-sm'
       }`}
     >
+      {/* Slim Scroll Progress Bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gray-100/50 z-50" id="scroll-progress-container">
+        <div
+          className="h-full bg-accent-gradient transition-all duration-75"
+          style={{ width: `${scrollProgress}%` }}
+          id="scroll-progress-bar"
+        ></div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo Section */}
