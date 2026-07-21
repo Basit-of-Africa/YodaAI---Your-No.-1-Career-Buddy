@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YodaAI Assistant</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #0b1120; /* Dark slate matching YodaAI theme */
+    }
+    flowise-fullpagechatbot {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <flowise-fullpagechatbot></flowise-fullpagechatbot>
+  <script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+    Chatbot.init({
+        chatflowid: "24fac8da-d42b-4bd0-adf5-5451541fc65d",
+        apiHost: "https://cloud.flowiseai.com",
+        theme: {
+            chatWindow: {
+                showTitle: true,
+                title: "YodaAI",
+                welcomeMessage: "Hello! I am YodaAI, your workspace career companion. How can I assist you today?",
+                backgroundColor: "#0b1120",
+                fontSize: 14,
+                userMessage: {
+                    backgroundColor: "#2e86ff",
+                    textColor: "#ffffff",
+                },
+                botMessage: {
+                    backgroundColor: "#1e293b",
+                    textColor: "#f8fafc",
+                },
+                textInput: {
+                    placeholder: "Type your message...",
+                    backgroundColor: "#0f172a",
+                    textColor: "#ffffff",
+                    sendButtonColor: "#2e86ff",
+                }
+            }
+        }
+    })
+  </script>
+</body>
+</html>

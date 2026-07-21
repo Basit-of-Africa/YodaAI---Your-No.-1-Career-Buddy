@@ -33,6 +33,7 @@ import { FAQAccordion } from './components/FAQAccordion';
 import { Footer } from './components/Footer';
 import { RobotMascot } from './components/RobotMascot';
 import { InteractiveWalkthrough } from './components/InteractiveWalkthrough';
+import { ChatbotWidget } from './components/ChatbotWidget';
 
 // Use path of our generated premium hero illustration
 const heroIllustration = "/src/assets/images/yodaai_hero_illustration_1784033006039.jpg";
@@ -604,6 +605,9 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Floating Chatbot Widget (Isolated Context) */}
+      <ChatbotWidget />
     </div>
   );
 }
