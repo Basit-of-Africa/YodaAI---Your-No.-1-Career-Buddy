@@ -94,3 +94,12 @@
   box-shadow: 0 10px 25px -5px rgba(46, 134, 255, 0.3);
 }
 
+/* Custom layout adjustment: Add 50px padding to left and right side of the website on desktop/PC */
+@media (min-width: 1024px) {
+  .lg\:px-8 {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+}
+
+
