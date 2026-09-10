@@ -51,7 +51,7 @@ export const InteractiveWalkthrough: React.FC = () => {
   const [checklist, setChecklist] = useState([
     { id: '1', text: 'Analyze job description & align transferable keywords', checked: false },
     { id: '2', text: 'Format 3 professional stories using the STAR method', checked: false },
-    { id: '3', text: 'Draft 3 smart questions regarding iLEAD AFRICA mission', checked: false },
+    { id: '3', text: 'Draft 3 smart questions regarding Future Forward mission', checked: false },
     { id: '4', text: 'Practice vocal pacing & body language with YodaAI audio', checked: false },
   ]);
   const [drillCompleted, setDrillCompleted] = useState(false);
@@ -165,7 +165,7 @@ export const InteractiveWalkthrough: React.FC = () => {
     setChecklist([
       { id: '1', text: 'Analyze job description & align transferable keywords', checked: false },
       { id: '2', text: 'Format 3 professional stories using the STAR method', checked: false },
-      { id: '3', text: 'Draft 3 smart questions regarding iLEAD AFRICA mission', checked: false },
+      { id: '3', text: 'Draft 3 smart questions regarding Future Forward mission', checked: false },
       { id: '4', text: 'Practice vocal pacing & body language with YodaAI audio', checked: false },
     ]);
     setDrillCompleted(false);

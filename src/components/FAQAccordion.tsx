@@ -19,7 +19,7 @@ export const FAQAccordion: React.FC = () => {
     {
       id: 'faq-2',
       question: 'Is YodaAI free to use?',
-      answer: 'Yes! YodaAI is designed to be highly accessible. We provide robust free features—including instant CV review, checklist generation, and readiness assessments—to empower young Nigerians and Africans, aligning with iLEAD AFRICA\'s core belief that career guidance should not be locked behind a paywall.',
+      answer: 'Yes! YodaAI is designed to be highly accessible. We provide robust free features—including instant CV review, checklist generation, and readiness assessments—to empower young Nigerians and Africans, aligning with Future Forward\'s core belief that career guidance should not be locked behind a paywall.',
     },
     {
       id: 'faq-3',
@@ -33,8 +33,8 @@ export const FAQAccordion: React.FC = () => {
     },
     {
       id: 'faq-5',
-      question: 'What is iLEAD AFRICA\'s involvement in YodaAI?',
-      answer: 'YodaAI was designed and prepared for iLEAD AFRICA. iLEAD AFRICA is a registered youth-focused organization championing leadership education, career development, and structural capacity building for young Africans. YodaAI serves as the technology-driven carrier for iLEAD\'s career-readiness mandate.',
+      question: 'What is Future Forward\'s involvement in YodaAI?',
+      answer: 'YodaAI was designed and prepared for Future Forward. Future Forward is a registered youth-focused organization championing leadership education, career development, and structural capacity building for young Africans. YodaAI serves as the technology-driven carrier for Future Forward\'s career-readiness mandate.',
     },
   ];
 

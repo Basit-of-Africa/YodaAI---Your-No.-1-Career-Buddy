@@ -72,7 +72,7 @@ export const Header: React.FC = () => {
                 Yoda<span className="text-accent-gradient">AI</span>
               </span>
               <span className="text-[10px] font-sans font-semibold text-gray-500 uppercase tracking-widest leading-none">
-                By iLEAD AFRICA
+                BY FUTURE FORWARD
               </span>
             </div>
           </a>

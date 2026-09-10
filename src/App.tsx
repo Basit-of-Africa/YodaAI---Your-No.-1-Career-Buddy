@@ -23,7 +23,8 @@ import {
   ShieldAlert,
   ChevronRight,
   ThumbsUp,
-  ExternalLink
+  ExternalLink,
+  Download
 } from 'lucide-react';
 
 // Custom Components
@@ -62,6 +63,92 @@ export default function App() {
   const handleRatingClick = (stars: number) => {
     setRating(stars);
     setFeedbackSent(true);
+  };
+
+  const handleDownloadPDF = () => {
+    const pdfContent = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R >> >> /MediaBox [0 0 595.275 841.889] /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 1200 >>
+stream
+BT
+/F1 20 Tf
+50 780 Td
+(YODA-AI CAREER READINESS GUIDE) Tj
+/F1 12 Tf
+0 -30 Td
+(Prepared by FUTURE FORWARD & YodaAI) Tj
+0 -30 Td
+(Your No. 1 Career Companion for offline success.) Tj
+0 -40 Td
+(1. CV & RESUME ASSESSMENT CHECKLIST) Tj
+0 -25 Td
+(- Metrics-Driven: Quantify your results (e.g. 'Increased sales by 15%').) Tj
+0 -20 Td
+(- Key-Words: Align resume terms with modern job listings.) Tj
+0 -20 Td
+(- Layout: Clean, un-cluttered, standard Helvetica, 1-2 pages maximum.) Tj
+0 -20 Td
+(- No Typos: Proof-read every single line before submitting.) Tj
+0 -40 Td
+(2. INTERVIEW PREPARATION MILESTONES) Tj
+0 -25 Td
+(- Sector Research: Study the company's core services and challenges.) Tj
+0 -20 Td
+(- STAR Method: Situation, Task, Action, Result for your stories.) Tj
+0 -20 Td
+(- Body Language: Confident posture, strong eye contact, clear tone.) Tj
+0 -20 Td
+(- Follow-up: Send a polite thank-you email within 24 hours.) Tj
+0 -40 Td
+(3. LINKEDIN & PERSONAL BRANDING STRATEGY) Tj
+0 -25 Td
+(- Headline: Craft a clear, keyword-rich headline showing your value.) Tj
+0 -20 Td
+(- Summary: Tell your professional story in the first person.) Tj
+0 -20 Td
+(- Network: Connect with industry peers and share relevant insights.) Tj
+0 -40 Td
+(For live AI CV review and interactive mock interviews, visit:) Tj
+0 -20 Td
+(https://yodaai-career-buddy.web.app) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000235 00000 n 
+0000000302 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1100
+%%EOF`;
+
+    const blob = new Blob([pdfContent], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'YodaAI_Career_Readiness_Guide.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   // Feature cards data (Strictly 6 cards from the brief)
@@ -162,7 +249,7 @@ export default function App() {
                 >
                   <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
                   <span className="text-xs font-semibold text-gray-600 font-sans tracking-wide">
-                    Built by <span className="font-bold text-brand-navy">iLEAD AFRICA</span>
+                    Built by <span className="font-bold text-brand-navy">FUTURE FORWARD</span>
                   </span>
                 </motion.div>
 
@@ -301,7 +388,7 @@ export default function App() {
                       "Everyone deserves access to quality career guidance, regardless of their background, location, or stage of career."
                     </p>
                     <span className="text-[10px] font-sans font-bold text-brand-blue uppercase tracking-widest block mt-1.5">
-                      The YodaAI & iLEAD AFRICA Belief Statement
+                      The YodaAI & Future Forward Belief Statement
                     </span>
                   </div>
                 </div>
@@ -345,9 +432,22 @@ export default function App() {
                   <h3 className="text-lg font-heading font-bold text-brand-navy mb-3 group-hover:text-brand-blue transition-colors">
                     {feat.title}
                   </h3>
-                  <p className="text-sm text-gray-500 leading-relaxed font-sans flex-grow">
+                  <p className="text-sm text-gray-500 leading-relaxed font-sans flex-grow mb-4">
                     {feat.description}
                   </p>
+                  {feat.id === 'readiness-support' && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownloadPDF();
+                      }}
+                      className="mt-2 w-full bg-accent-gradient text-white font-sans font-bold text-xs px-4 py-2.5 rounded-xl hover-accent-glow hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+                      id="download-career-guide-btn"
+                    >
+                      <Download size={14} />
+                      Download Career Guide PDF
+                    </button>
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -410,7 +510,7 @@ export default function App() {
                   Bridging the Career Guidance Gap in Africa
                 </h2>
                 <p className="text-gray-500 font-sans text-sm sm:text-base leading-relaxed">
-                  iLEAD AFRICA prepared YodaAI as a strategic initiative to deploy cutting-edge digital literacy and operational support for career progression across youth demographics.
+                  Future Forward prepared YodaAI as a strategic initiative to deploy cutting-edge digital literacy and operational support for career progression across youth demographics.
                 </p>
                 <p className="text-gray-500 font-sans text-sm sm:text-base leading-relaxed">
                   We believe technology should catalyze social and economic mobility. YodaAI acts as a personalized career buddy, bypassing standard systemic bottlenecks to deliver high-quality, instant curriculum review.
@@ -503,7 +603,7 @@ export default function App() {
             {/* Live feedback collector tool (For amazing UX craftsmanship) */}
             <div className="mt-16 max-w-xl mx-auto bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center space-y-4">
               <h3 className="font-heading font-bold text-sm text-brand-navy">
-                Are you an iLEAD Scholar or student? Let us know what you think:
+                Are you a Future Forward Fellow or student? Let us know what you think:
               </h3>
               
               {!feedbackSent ? (
@@ -550,11 +650,11 @@ export default function App() {
               <span className="text-xs font-bold text-brand-green uppercase tracking-widest bg-brand-green/10 px-3.5 py-1.5 rounded-full inline-block">
                 Get Onboarded Today
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold tracking-tight text-white">
                 Start Building a Stronger <span className="text-accent-gradient">Career Profile</span> Today
               </h2>
               <p className="text-sm sm:text-base text-slate-400 font-sans">
-                Sign up for exclusive iLEAD Africa career workshops, direct recruitment alerts, and immediate alpha access when YodaAI rolls out locally.
+                Sign up for exclusive Future Forward career workshops, direct recruitment alerts, and immediate alpha access when YodaAI rolls out locally.
               </p>
             </div>
 
@@ -596,7 +696,7 @@ export default function App() {
 
             {/* Extra trust details */}
             <p className="text-[10px] text-slate-500 font-sans">
-              🔒 YodaAI values your privacy. We never share your data. Supported by iLEAD AFRICA.
+              🔒 YodaAI values your privacy. We never share your data. Supported by Future Forward.
             </p>
           </div>
         </section>

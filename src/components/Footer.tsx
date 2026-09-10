@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
                   Yoda<span className="text-accent-gradient">AI</span>
                 </span>
                 <span className="text-[10px] font-sans font-semibold text-slate-400 uppercase tracking-widest leading-none">
-                  By iLEAD AFRICA
+                  BY FUTURE FORWARD
                 </span>
               </div>
             </a>
@@ -86,7 +86,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#about" className="hover:text-brand-green transition-colors">
-                  About iLEAD
+                  About Future Forward
                 </a>
               </li>
               <li>
@@ -134,7 +134,7 @@ export const Footer: React.FC = () => {
           {/* Contact & Legal (Col 4: span 3) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-sm font-heading font-bold text-white uppercase tracking-wider">
-              iLEAD AFRICA
+              FUTURE FORWARD
             </h4>
             <ul className="space-y-3.5 text-sm font-sans text-slate-400">
               <li className="flex items-start gap-2.5">
@@ -145,8 +145,8 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail size={16} className="text-brand-blue flex-shrink-0" />
-                <a href="mailto:info@ileadafrica.org" className="hover:text-white transition-colors">
-                  info@ileadafrica.org
+                <a href="mailto:info@futureforward.org" className="hover:text-white transition-colors">
+                  info@futureforward.org
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
@@ -169,7 +169,7 @@ export const Footer: React.FC = () => {
             <a href="#" className="hover:text-slate-300 transition-colors">Terms of Service</a>
           </div>
           <p className="flex items-center gap-1">
-            Built with ❤️ by <span className="text-slate-300 font-semibold">iLEAD AFRICA</span>
+            Built with ❤️ by <span className="text-slate-300 font-semibold">FUTURE FORWARD</span>
           </p>
         </div>
       </div>

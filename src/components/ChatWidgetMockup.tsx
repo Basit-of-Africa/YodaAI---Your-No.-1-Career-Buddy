@@ -26,7 +26,7 @@ export const ChatWidgetMockup: React.FC = () => {
       id: 'cv-review',
       label: '📄 Review My CV Summary',
       userMessage: 'Can you review my CV summary? It feels a bit generic.',
-      yodaResponse: 'Your current summary is clear, but it lacks measurable results. Instead of "Responsible for managing local events", try this formula: "Coordinated 4 major youth forums for iLEAD AFRICA, hosting over 500+ attendees and boosting post-event engagement by 35%." Numbers prove your competence instantly! 🚀',
+      yodaResponse: 'Your current summary is clear, but it lacks measurable results. Instead of "Responsible for managing local events", try this formula: "Coordinated 4 major youth forums for Future Forward, hosting over 500+ attendees and boosting post-event engagement by 35%." Numbers prove your competence instantly! 🚀',
     },
     {
       id: 'interview-prep',
@@ -38,7 +38,7 @@ export const ChatWidgetMockup: React.FC = () => {
       id: 'linkedin-brand',
       label: '✨ Optimize LinkedIn Profile',
       userMessage: 'How do I write a good headline as an entry-level professional?',
-      yodaResponse: 'Avoid generic titles like "Job Seeker" or "Graduate"! Instead, write: "Aspiring Operations Associate | Project Coordinator | Passionate about Youth Leadership & Community Impact | Trained by iLEAD AFRICA." This targets exactly what recruiters search for! 🎯',
+      yodaResponse: 'Avoid generic titles like "Job Seeker" or "Graduate"! Instead, write: "Aspiring Operations Associate | Project Coordinator | Passionate about Youth Leadership & Community Impact | Trained by Future Forward." This targets exactly what recruiters search for! 🎯',
     },
     {
       id: 'career-change',
@@ -140,7 +140,7 @@ export const ChatWidgetMockup: React.FC = () => {
               <p className="font-semibold text-brand-navy mb-1 flex items-center gap-1.5">
                 💡 Did you know?
               </p>
-              YodaAI provides personalized advice tailored to iLEAD Africa's career success framework, helping secondary graduates to mid-career transitioners build competitive profiles.
+              YodaAI provides personalized advice tailored to Future Forward's career success framework, helping secondary graduates to mid-career transitioners build competitive profiles.
             </div>
           </div>
 
