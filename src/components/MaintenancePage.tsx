@@ -10,14 +10,8 @@ import {
   Clock, 
   Sparkles, 
   CheckCircle2, 
-  Download, 
   Mail, 
-  Copy, 
-  Check, 
   ArrowRight, 
-  ShieldCheck, 
-  Cpu, 
-  FileText, 
   RefreshCw 
 } from 'lucide-react';
 import { RobotMascot } from './RobotMascot';
@@ -45,7 +39,6 @@ export const MaintenancePage: React.FC<MaintenancePageProps> = ({
   const [userRole, setUserRole] = useState('Fresh Graduate');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [copiedEmail, setCopiedEmail] = useState(false);
 
   // Live timer effect
   useEffect(() => {
@@ -105,129 +98,6 @@ export const MaintenancePage: React.FC<MaintenancePageProps> = ({
       setIsSubscribed(true);
     }
   };
-
-  const copyContactEmail = () => {
-    navigator.clipboard.writeText('support@futureforward.org');
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2500);
-  };
-
-  const handleDownloadOfflineGuide = () => {
-    const pdfContent = `%PDF-1.4
-1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
-endobj
-2 0 obj
-<< /Type /Pages /Kids [3 0 R] /Count 1 >>
-endobj
-3 0 obj
-<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R >> >> /MediaBox [0 0 595.275 841.889] /Contents 5 0 R >>
-endobj
-4 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
-endobj
-5 0 obj
-<< /Length 1200 >>
-stream
-BT
-/F1 20 Tf
-50 780 Td
-(YODA-AI CAREER READINESS GUIDE) Tj
-/F1 12 Tf
-0 -30 Td
-(Prepared by FUTURE FORWARD & YodaAI) Tj
-0 -30 Td
-(Your No. 1 Career Companion for offline success.) Tj
-0 -40 Td
-(1. CV & RESUME ASSESSMENT CHECKLIST) Tj
-0 -25 Td
-(- Metrics-Driven: Quantify your results (e.g. 'Increased sales by 15%').) Tj
-0 -20 Td
-(- Key-Words: Align resume terms with modern job listings.) Tj
-0 -20 Td
-(- Layout: Clean, un-cluttered, standard Helvetica, 1-2 pages maximum.) Tj
-0 -20 Td
-(- No Typos: Proof-read every single line before submitting.) Tj
-0 -40 Td
-(2. INTERVIEW PREPARATION MILESTONES) Tj
-0 -25 Td
-(- Sector Research: Study the company's core services and challenges.) Tj
-0 -20 Td
-(- STAR Method: Situation, Task, Action, Result for your stories.) Tj
-0 -20 Td
-(- Body Language: Confident posture, strong eye contact, clear tone.) Tj
-0 -20 Td
-(- Follow-up: Send a polite thank-you email within 24 hours.) Tj
-0 -40 Td
-(3. LINKEDIN & PERSONAL BRANDING STRATEGY) Tj
-0 -25 Td
-(- Headline: Craft a clear, keyword-rich headline showing your value.) Tj
-0 -20 Td
-(- Summary: Tell your professional story in the first person.) Tj
-0 -20 Td
-(- Network: Connect with industry peers and share relevant insights.) Tj
-0 -40 Td
-(For live AI CV review and interactive mock interviews, visit:) Tj
-0 -20 Td
-(https://yodaai-career-buddy.web.app) Tj
-ET
-endstream
-endobj
-xref
-0 6
-0000000000 65535 f 
-0000000009 00000 n 
-0000000058 00000 n 
-0000000115 00000 n 
-0000000235 00000 n 
-0000000302 00000 n 
-trailer
-<< /Size 6 /Root 1 0 R >>
-startxref
-1100
-%%EOF`;
-
-    const blob = new Blob([pdfContent], { type: 'application/pdf' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'YodaAI_Career_Readiness_Guide.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
-
-  const systems = [
-    {
-      name: "Gemini 2.5 Flash Career Intelligence Engine",
-      description: "Upgrading to next-generation low-latency context window for deeper CV evaluations.",
-      status: "completed",
-      badge: "Completed",
-      badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-200"
-    },
-    {
-      name: "ATS Resume Diagnostic Rubric (2026 Edition)",
-      description: "Recalibrating high-impact action verbs and sector-specific metric benchmarks.",
-      status: "in-progress",
-      badge: "88% Finalizing",
-      badgeClass: "bg-amber-50 text-amber-700 border-amber-200 animate-pulse"
-    },
-    {
-      name: "STAR Behavioral Interview Simulator",
-      description: "Optimizing situational scenario libraries for technical and panel evaluations.",
-      status: "in-progress",
-      badge: "In Progress",
-      badgeClass: "bg-blue-50 text-blue-700 border-blue-200"
-    },
-    {
-      name: "Knowledge Vault & Candidate Privacy Sandbox",
-      description: "Ensuring zero document retention and end-to-end encrypted session memory.",
-      status: "completed",
-      badge: "Secured",
-      badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-200"
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-[#FAFBFC] text-slate-800 flex flex-col justify-between selection:bg-brand-blue/20 selection:text-brand-navy">
@@ -430,116 +300,6 @@ startxref
               )}
             </div>
           </motion.div>
-
-          {/* Two Columns: Systems Upgrade Status & Immediate Offline Value */}
-          <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
-            
-            {/* Left 7 Columns: System Upgrades Checklist */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="lg:col-span-7 bg-white rounded-3xl border border-gray-200/90 p-6 sm:p-7 shadow-sm"
-            >
-              <div className="flex items-center justify-between mb-5">
-                <div className="flex items-center gap-2">
-                  <Cpu className="text-brand-blue" size={20} />
-                  <h3 className="font-heading font-bold text-lg text-brand-navy">
-                    Platform Upgrade Checklist
-                  </h3>
-                </div>
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                  Live Diagnostics
-                </span>
-              </div>
-
-              <div className="space-y-3.5">
-                {systems.map((sys, idx) => (
-                  <div 
-                    key={idx}
-                    className="p-3.5 rounded-2xl border border-gray-100 hover:border-gray-200 bg-slate-50/60 transition-all flex items-start gap-3"
-                  >
-                    <div className="mt-0.5 shrink-0">
-                      {sys.status === 'completed' ? (
-                        <CheckCircle2 size={18} className="text-emerald-500" />
-                      ) : (
-                        <RefreshCw size={18} className="text-amber-500 animate-spin" />
-                      )}
-                    </div>
-                    <div className="flex-grow">
-                      <div className="flex items-center justify-between gap-2">
-                        <h4 className="text-sm font-semibold text-brand-navy">
-                          {sys.name}
-                        </h4>
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${sys.badgeClass}`}>
-                          {sys.badge}
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
-                        {sys.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Right 5 Columns: Immediate Offline Resource & Emergency Support */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="lg:col-span-5 space-y-6"
-            >
-              {/* Offline Career Guide Card */}
-              <div className="bg-gradient-to-br from-emerald-50 to-teal-50/40 border border-emerald-200/80 rounded-3xl p-6">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-3">
-                  <FileText className="text-emerald-600" size={20} />
-                </div>
-                <h4 className="font-heading font-bold text-base text-emerald-950">
-                  Don't Let Maintenance Pause You
-                </h4>
-                <p className="text-xs text-emerald-800/80 mt-1 leading-relaxed">
-                  Download our official offline <strong>Career Readiness & CV Assessment Checklist</strong> (PDF) for immediate self-study.
-                </p>
-                <button
-                  onClick={handleDownloadOfflineGuide}
-                  className="mt-4 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs py-2.5 px-4 rounded-xl shadow-sm transition-all flex items-center justify-center gap-1.5"
-                >
-                  <Download size={14} />
-                  <span>Download Free Readiness Guide</span>
-                </button>
-              </div>
-
-              {/* Direct Support Card */}
-              <div className="bg-white border border-gray-200/90 rounded-3xl p-6 shadow-sm">
-                <div className="flex items-center gap-2 mb-2">
-                  <ShieldCheck className="text-brand-blue" size={18} />
-                  <h4 className="font-heading font-bold text-sm text-brand-navy">
-                    Need Urgent Assistance?
-                  </h4>
-                </div>
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  Our career advisory specialists at Future Forward remain available for urgent inquiries and interview advice.
-                </p>
-
-                <div className="mt-3 flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/70 text-xs text-slate-700">
-                  <span className="font-mono text-[11px] truncate select-all">
-                    support@futureforward.org
-                  </span>
-                  <button
-                    onClick={copyContactEmail}
-                    className="p-1.5 text-slate-500 hover:text-brand-blue transition-colors ml-2 shrink-0 rounded hover:bg-slate-200/60"
-                    title="Copy email address"
-                  >
-                    {copiedEmail ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-                  </button>
-                </div>
-              </div>
-
-            </motion.div>
-
-          </div>
         </div>
       </main>
 
