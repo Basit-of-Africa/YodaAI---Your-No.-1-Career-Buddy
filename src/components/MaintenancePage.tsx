@@ -4,13 +4,12 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { 
   Wrench, 
   Clock, 
   Sparkles, 
   CheckCircle2, 
-  AlertCircle, 
   Download, 
   Mail, 
   Copy, 
@@ -19,15 +18,12 @@ import {
   ShieldCheck, 
   Cpu, 
   FileText, 
-  RefreshCw,
-  Eye,
-  Sliders,
-  ExternalLink
+  RefreshCw 
 } from 'lucide-react';
 import { RobotMascot } from './RobotMascot';
 
 interface MaintenancePageProps {
-  onBypass: () => void;
+  onBypass?: () => void;
   onToggleMaintenance?: (active: boolean) => void;
   isMaintenanceActive?: boolean;
 }
@@ -50,7 +46,6 @@ export const MaintenancePage: React.FC<MaintenancePageProps> = ({
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [showAdminDetails, setShowAdminDetails] = useState(false);
 
   // Live timer effect
   useEffect(() => {
@@ -257,23 +252,13 @@ startxref
             </div>
           </div>
 
-          {/* Status Pill & Bypass / Admin Controls */}
+          {/* Status Pill */}
           <div className="flex items-center gap-3">
-            <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200/80 px-3 py-1.5 rounded-full text-xs font-medium text-amber-800">
+            <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200/80 px-3.5 py-1.5 rounded-full text-xs font-medium text-amber-800 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
               <span className="hidden sm:inline font-semibold">Active Maintenance</span>
               <span className="sm:hidden font-semibold">Maintenance</span>
             </div>
-
-            {/* Admin Preview Mode Bypass */}
-            <button
-              onClick={onBypass}
-              className="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-sm hover:shadow transition-all group"
-              title="Preview the live website as an administrator/tester"
-            >
-              <Eye size={13} className="text-brand-green group-hover:scale-110 transition-transform" />
-              <span>Preview Live Site</span>
-            </button>
           </div>
         </div>
       </header>
@@ -555,64 +540,6 @@ startxref
             </motion.div>
 
           </div>
-
-          {/* Admin Control Bar for User/Reviewer Testing */}
-          <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span>Maintenance Mode is <strong>ACTIVE</strong> for all incoming homepage links.</span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setShowAdminDetails(!showAdminDetails)}
-                className="hover:text-slate-800 underline underline-offset-2 flex items-center gap-1"
-              >
-                <Sliders size={12} />
-                <span>{showAdminDetails ? 'Hide Switch' : 'Maintenance Switch'}</span>
-              </button>
-
-              <button
-                onClick={onBypass}
-                className="text-brand-blue hover:text-blue-700 font-semibold underline underline-offset-2 flex items-center gap-1"
-              >
-                <span>Enter Live Homepage</span>
-                <ArrowRight size={12} />
-              </button>
-            </div>
-          </div>
-
-          {/* Admin Quick Switch Drawer */}
-          <AnimatePresence>
-            {showAdminDetails && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="mt-3 p-4 rounded-2xl bg-slate-100 border border-slate-200 text-xs text-slate-700 space-y-3"
-              >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-                  <div>
-                    <p className="font-semibold text-slate-900">Developer & Admin Maintenance State</p>
-                    <p className="text-slate-500 text-[11px]">Toggle between the active Maintenance Page and the live application.</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => onToggleMaintenance && onToggleMaintenance(!isMaintenanceActive)}
-                      className={`px-3 py-1.5 rounded-lg font-semibold text-xs transition-all ${
-                        isMaintenanceActive 
-                          ? 'bg-amber-500 text-white shadow-sm'
-                          : 'bg-emerald-600 text-white shadow-sm'
-                      }`}
-                    >
-                      {isMaintenanceActive ? 'Deactivate Maintenance (Go Live)' : 'Reactivate Maintenance Mode'}
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
         </div>
       </main>
 

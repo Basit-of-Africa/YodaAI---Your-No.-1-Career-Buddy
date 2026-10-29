@@ -60,37 +60,45 @@ export default function App() {
     return sessionStorage.getItem('yodaai_preview_mode') === 'true';
   });
 
-  // Redirection effect: Whenever homepage or link is visited while maintenance is active, redirect to /maintenance
+  // Check server maintenance status on mount
+  React.useEffect(() => {
+    const fetchMaintenanceStatus = async () => {
+      try {
+        const res = await fetch('/api/maintenance');
+        if (res.ok) {
+          const data = await res.json();
+          if (typeof data.active === 'boolean') {
+            // If user hasn't explicitly overridden locally in this session, sync with server
+            if (localStorage.getItem('yodaai_maintenance_active') === null) {
+              setIsMaintenanceActive(data.active);
+            }
+          }
+        }
+      } catch {
+        // Fallback to active maintenance default
+      }
+    };
+    fetchMaintenanceStatus();
+  }, []);
+
+  // Listen to popstate changes for back/forward browser navigation
   React.useEffect(() => {
     const handleLocationChange = () => {
       setCurrentPath(window.location.pathname);
     };
 
     window.addEventListener('popstate', handleLocationChange);
-
-    // If maintenance is active and not in preview bypass, redirect to /maintenance
-    if (isMaintenanceActive && !isBypassed) {
-      if (window.location.pathname === '/' || window.location.pathname === '') {
-        window.history.replaceState(null, '', '/maintenance');
-        setCurrentPath('/maintenance');
-      }
-    }
-
     return () => window.removeEventListener('popstate', handleLocationChange);
-  }, [isMaintenanceActive, isBypassed]);
+  }, []);
 
   const handleBypassToLiveSite = () => {
     setIsBypassed(true);
     sessionStorage.setItem('yodaai_preview_mode', 'true');
-    window.history.pushState(null, '', '/');
-    setCurrentPath('/');
   };
 
   const handleReturnToMaintenance = () => {
     setIsBypassed(false);
     sessionStorage.removeItem('yodaai_preview_mode');
-    window.history.pushState(null, '', '/maintenance');
-    setCurrentPath('/maintenance');
   };
 
   const handleToggleMaintenance = async (active: boolean) => {
@@ -111,11 +119,6 @@ export default function App() {
     if (active) {
       setIsBypassed(false);
       sessionStorage.removeItem('yodaai_preview_mode');
-      window.history.pushState(null, '', '/maintenance');
-      setCurrentPath('/maintenance');
-    } else {
-      window.history.pushState(null, '', '/');
-      setCurrentPath('/');
     }
   };
 
@@ -322,7 +325,7 @@ startxref
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-slate-900 animate-ping"></span>
             <span>
-              <strong>Maintenance Mode is currently ACTIVE:</strong> Incoming visitors to the homepage link are redirected to the Maintenance Page. You are previewing the live site.
+              <strong>Maintenance Mode is currently ACTIVE:</strong> Incoming visitors to the homepage resolve directly to the Maintenance Page. You are previewing the live site.
             </span>
           </div>
           <div className="flex items-center gap-2 shrink-0">
