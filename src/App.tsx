@@ -41,14 +41,12 @@ import { MaintenancePage } from './components/MaintenancePage';
 const heroIllustration = "/src/assets/images/yodaai_hero_illustration_1784033006039.jpg";
 
 export default function App() {
-  // Maintenance page routing & activation state (Activated by default)
+  // Maintenance page routing & activation state (Deactivated: homepage resolves to home)
   const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
   const [isMaintenanceActive, setIsMaintenanceActive] = useState<boolean>(() => {
-    const stored = localStorage.getItem('yodaai_maintenance_active');
-    if (stored !== null) {
-      return stored === 'true';
-    }
-    return true; // Activated by default
+    // Reset stored state to ensure homepage resolves directly to home
+    localStorage.setItem('yodaai_maintenance_active', 'false');
+    return false;
   });
 
   // Admin preview mode to inspect live site while maintenance is active
@@ -68,14 +66,12 @@ export default function App() {
         if (res.ok) {
           const data = await res.json();
           if (typeof data.active === 'boolean') {
-            // If user hasn't explicitly overridden locally in this session, sync with server
-            if (localStorage.getItem('yodaai_maintenance_active') === null) {
-              setIsMaintenanceActive(data.active);
-            }
+            setIsMaintenanceActive(data.active);
+            localStorage.setItem('yodaai_maintenance_active', String(data.active));
           }
         }
       } catch {
-        // Fallback to active maintenance default
+        // Fallback to deactivated
       }
     };
     fetchMaintenanceStatus();

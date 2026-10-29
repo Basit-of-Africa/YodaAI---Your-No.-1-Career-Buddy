@@ -91,7 +91,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Maintenance status & notification endpoints
-let isServerMaintenanceActive = true;
+let isServerMaintenanceActive = false;
 const maintenanceSubscribers: Array<{ email: string; role: string; date: string }> = [];
 
 app.get('/api/maintenance', (req, res) => {
