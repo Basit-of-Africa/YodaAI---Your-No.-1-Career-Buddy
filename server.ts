@@ -90,6 +90,43 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', hasGeminiKey: Boolean(process.env.GEMINI_API_KEY) });
 });
 
+// Maintenance status & notification endpoints
+let isServerMaintenanceActive = true;
+const maintenanceSubscribers: Array<{ email: string; role: string; date: string }> = [];
+
+app.get('/api/maintenance', (req, res) => {
+  res.json({
+    active: isServerMaintenanceActive,
+    message: 'System upgrade in progress: YodaAI is upgrading its AI career engines and ATS calibration benchmarks.',
+    estimatedCompletion: '3 hours, 40 minutes',
+    progressPercentage: 88
+  });
+});
+
+app.post('/api/maintenance/toggle', (req, res) => {
+  const { active } = req.body;
+  if (typeof active === 'boolean') {
+    isServerMaintenanceActive = active;
+  } else {
+    isServerMaintenanceActive = !isServerMaintenanceActive;
+  }
+  res.json({ success: true, active: isServerMaintenanceActive });
+});
+
+app.post('/api/notify-subscriber', (req, res) => {
+  const { email, role } = req.body;
+  if (!email || typeof email !== 'string') {
+    return res.status(400).json({ error: 'Valid email required' });
+  }
+  maintenanceSubscribers.push({
+    email,
+    role: role || 'General',
+    date: new Date().toISOString()
+  });
+  console.log(`[Maintenance Subscriber] ${email} (${role})`);
+  res.json({ success: true, count: maintenanceSubscribers.length });
+});
+
 // Chat & Document Analysis API Endpoint
 app.post('/api/chat', async (req, res) => {
   try {

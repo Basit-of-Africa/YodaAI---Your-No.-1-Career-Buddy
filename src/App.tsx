@@ -35,11 +35,90 @@ import { Footer } from './components/Footer';
 import { RobotMascot } from './components/RobotMascot';
 import { InteractiveWalkthrough } from './components/InteractiveWalkthrough';
 import { ChatbotWidget } from './components/ChatbotWidget';
+import { MaintenancePage } from './components/MaintenancePage';
 
 // Use path of our generated premium hero illustration
 const heroIllustration = "/src/assets/images/yodaai_hero_illustration_1784033006039.jpg";
 
 export default function App() {
+  // Maintenance page routing & activation state (Activated by default)
+  const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
+  const [isMaintenanceActive, setIsMaintenanceActive] = useState<boolean>(() => {
+    const stored = localStorage.getItem('yodaai_maintenance_active');
+    if (stored !== null) {
+      return stored === 'true';
+    }
+    return true; // Activated by default
+  });
+
+  // Admin preview mode to inspect live site while maintenance is active
+  const [isBypassed, setIsBypassed] = useState<boolean>(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('bypass') === 'true' || urlParams.get('preview') === 'true' || urlParams.get('admin') === 'true') {
+      return true;
+    }
+    return sessionStorage.getItem('yodaai_preview_mode') === 'true';
+  });
+
+  // Redirection effect: Whenever homepage or link is visited while maintenance is active, redirect to /maintenance
+  React.useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+
+    // If maintenance is active and not in preview bypass, redirect to /maintenance
+    if (isMaintenanceActive && !isBypassed) {
+      if (window.location.pathname === '/' || window.location.pathname === '') {
+        window.history.replaceState(null, '', '/maintenance');
+        setCurrentPath('/maintenance');
+      }
+    }
+
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, [isMaintenanceActive, isBypassed]);
+
+  const handleBypassToLiveSite = () => {
+    setIsBypassed(true);
+    sessionStorage.setItem('yodaai_preview_mode', 'true');
+    window.history.pushState(null, '', '/');
+    setCurrentPath('/');
+  };
+
+  const handleReturnToMaintenance = () => {
+    setIsBypassed(false);
+    sessionStorage.removeItem('yodaai_preview_mode');
+    window.history.pushState(null, '', '/maintenance');
+    setCurrentPath('/maintenance');
+  };
+
+  const handleToggleMaintenance = async (active: boolean) => {
+    setIsMaintenanceActive(active);
+    localStorage.setItem('yodaai_maintenance_active', String(active));
+    
+    // Sync with backend maintenance status
+    try {
+      await fetch('/api/maintenance/toggle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ active })
+      });
+    } catch {
+      // Local state is already updated
+    }
+
+    if (active) {
+      setIsBypassed(false);
+      sessionStorage.removeItem('yodaai_preview_mode');
+      window.history.pushState(null, '', '/maintenance');
+      setCurrentPath('/maintenance');
+    } else {
+      window.history.pushState(null, '', '/');
+      setCurrentPath('/');
+    }
+  };
+
   // Newsletter signup state
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -224,8 +303,45 @@ startxref
     },
   ];
 
+  // If maintenance mode is active (or user visits /maintenance) and not in bypass mode:
+  if ((isMaintenanceActive || currentPath === '/maintenance') && !isBypassed) {
+    return (
+      <MaintenancePage 
+        onBypass={handleBypassToLiveSite} 
+        onToggleMaintenance={handleToggleMaintenance}
+        isMaintenanceActive={isMaintenanceActive}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col font-sans bg-brand-offwhite selection:bg-brand-blue/20 selection:text-brand-navy" id="home">
+      {/* Sticky Admin Preview Banner if Maintenance is currently active */}
+      {isMaintenanceActive && isBypassed && (
+        <div className="bg-amber-400 text-slate-900 px-4 py-2.5 text-xs font-medium sticky top-0 z-[60] border-b border-amber-500/40 flex flex-col sm:flex-row items-center justify-between gap-2 shadow-sm">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-slate-900 animate-ping"></span>
+            <span>
+              <strong>Maintenance Mode is currently ACTIVE:</strong> Incoming visitors to the homepage link are redirected to the Maintenance Page. You are previewing the live site.
+            </span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={handleReturnToMaintenance}
+              className="bg-slate-900 hover:bg-slate-800 text-white px-3 py-1 rounded-full text-xs font-semibold transition-all shadow-sm"
+            >
+              Return to Maintenance Page
+            </button>
+            <button
+              onClick={() => handleToggleMaintenance(false)}
+              className="bg-white/90 hover:bg-white text-slate-900 border border-amber-600/30 px-3 py-1 rounded-full text-xs font-semibold transition-all"
+            >
+              Deactivate Maintenance
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <Header />
 

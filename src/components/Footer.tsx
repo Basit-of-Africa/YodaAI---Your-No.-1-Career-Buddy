@@ -163,10 +163,23 @@ export const Footer: React.FC = () => {
       <div className="border-t border-slate-800 bg-slate-950/40 py-6 text-xs text-center text-slate-500 font-sans">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p>© {new Date().getFullYear()} YodaAI. All rights reserved.</p>
-          <div className="flex gap-4">
+          <div className="flex items-center gap-3">
             <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
             <span>•</span>
             <a href="#" className="hover:text-slate-300 transition-colors">Terms of Service</a>
+            <span>•</span>
+            <a 
+              href="/maintenance" 
+              onClick={(e) => {
+                e.preventDefault();
+                sessionStorage.removeItem('yodaai_preview_mode');
+                window.location.href = '/maintenance';
+              }} 
+              className="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1 font-medium"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+              System Status
+            </a>
           </div>
           <p className="flex items-center gap-1">
             Built with ❤️ by <span className="text-slate-300 font-semibold">FUTURE FORWARD</span>
